@@ -22,7 +22,8 @@
                     </div>
                     <button class="btn btn-primary mb-2" @click="clicksearchProvince">ค้นหาอำเภอ</button>
                     <ul>
-                        <li v-for=" dist in distric_lt">{{dist}}</li>
+                        <li v-for="dist in district_lt">{{dist}}</li>
+                        
                     </ul>
                 </div>
             </div>
@@ -39,18 +40,14 @@
                     msg: "ComsumeData",
                     province_input: "",
                     province: [],
-                    distric_lt : [],
+                    district_lt : [],
                 };
             },
             methods :{
                 clicksearchProvince(){
-                    var dustric = this.province[this.province_input];
-                    this.distric_lt = Object.keys(dustric)
-                    console.log(dustric)
-                    //console.log(this.province_input)
-                    
-                    //var distric = this.province[this.province_input];
-                    //console.log(this.province['จังหวัด'][0]);
+                    var district = this.province[this.province_input];
+                    this.district_lt = Object.keys(district)
+                    console.log(district)
                 }
             },
             mounted() {
@@ -58,7 +55,6 @@
                     method: "get",
                     url: "https://numvarn.github.io/adv-web-pro/data/thaiprovince.json"
                 }).then((respone) => (this.province = respone.data))
-
             }
         }).mount('#app')
     </script>
