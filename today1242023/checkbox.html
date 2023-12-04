@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+    <h1>คุณต้องการนักเตะคนไหนมารวมทีมของคุณใน 4 คนนี้</h1>
+    <input type="checkbox" id="selectAll" v-model="selectAll" @change="toggleAll">
+    <label for="selectAll">เลือกทั้งหมด</label>
+    <ul>    
+        <li v-for="(item, index) in items" :key="index">
+            <input type="checkbox" :id="'checkbox' + index" v-model="checkedItems[index]" @change="handleCheckboxChange(index)">
+            <label :for="'checkbox' + index">{{ item }}</label>
+        </li>
+    </ul>
+</div>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        items: ['คิลิยัน เอ็มบัปเป้', 'เออร์ลิง ฮาลันด์', 'วินิซิอุส จูเนียร์', 'จู๊ด เบลลิงแฮม'],
+        checkedItems: [],
+        selectAll: false
+    },
+    methods: {
+        toggleAll() {
+            if (this.selectAll) {
+                this.checkedItems = [...this.items];
+                console.log('เลือกทั้งหมด');
+                console.log(this.checkedItems)
+            } else {
+                console.log('ยกเลิก');
+                this.checkedItems = [];
+            }
+        },
+        handleCheckboxChange(index) {
+            if (this.checkedItems[index]) {
+                console.log('คุณเลือก: ', this.items[index]);
+            }
+        },
+    },
+});
+</script>
+
+</body>
+</html>
