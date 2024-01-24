@@ -43,9 +43,15 @@
       text-decoration: none;
       font-weight: bold;
     }
-    p{
+    p {
         text-align: right;
         text-decoration: dashed;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
     }
 
     a:hover {
@@ -56,18 +62,20 @@
 <body>
   <div id="app">
     <div>
-      <h1>ข่าวประจำวันนี้</h1>
+      <h1>News Day</h1>
       <ul>
         <li v-for="article in articles" :key="article.title">
+            <img :src="article.image" alt="รูปภาพข่าว">
           <h2>{{ article.title }}</h2>
-          <p>สำนักข่าว {{ article.author }}</p>
-          <a :href="article.url" target="_blank" >อ่านข่าว</a>
+          <p>{{ article.publishedAt }}</p>
+         
+          <a :href="article.url" target="_blank">Read News</a>
         </li>
       </ul>
     </div>
   </div>
   <script>
-    const { createApp } = Vue
+    const { createApp } = Vue;
     createApp({
         data() {
             return {
@@ -77,8 +85,11 @@
         mounted() {
             axios({
                 method: "get",
-                url: "https://newsapi.org/v2/top-headlines?country=th&category=business&apiKey=80ec9122804a454db4bf8af2641ce368"
-            }).then((respone) => (this.articles = respone.data.articles))
+                url: "https://gnews.io/api/v4/search?q=example&lang=th&country=th&max=10&apikey=b3e1ec9f476dff6df2a6bf1ee04c6a59"
+            }).then((response) => {
+                this.articles = response.data.articles;
+                console.log(response.status);
+            })
         },
     }).mount('#app')
   </script>
