@@ -67,7 +67,7 @@
         <li v-for="article in articles" :key="article.title">
             <img :src="article.image" alt="รูปภาพข่าว">
           <h2>{{ article.title }}</h2>
-          <p>{{ article.publishedAt }}</p>
+          <p>Date: {{ formatDate(article.publishedAt) }}</p>
           <a :href="article.url" target="_blank">Read News</a>
         </li>
       </ul>
@@ -81,6 +81,12 @@
                 articles: []
             }
         },
+        methods: {
+            formatDate(dateString) {
+              const options = { year: 'numeric', month: 'long', day: 'numeric',};
+              return new Date(dateString).toLocaleDateString('en-EN', options);
+            }
+          },
         mounted() {
             axios({
                 method: "get",
