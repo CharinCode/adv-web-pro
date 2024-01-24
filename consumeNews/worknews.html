@@ -90,7 +90,7 @@
         mounted() {
             axios({
                 method: "get",
-                url: "https://gnews.io/api/v4/search?q=example&lang=us&country=us&max=10&apikey=b3e1ec9f476dff6df2a6bf1ee04c6a59"
+                url: "https://gnews.io/api/v4/search?q=example&lang=en&country=us&max=10&apikey=04aec2ad41ac7f4c90acea1e5bfae101"
             }).then((response) => {
                 this.articles = response.data.articles;
                 console.log(response.status);
